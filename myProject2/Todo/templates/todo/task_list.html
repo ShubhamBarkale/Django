@@ -1,0 +1,121 @@
+{% extends "todo/base.html" %}
+
+{% block title %}All Tasks - Todo App{% endblock %}
+
+{% block content %}
+
+<div class="mb-4">
+    <h2 class="fw-bold text-primary">
+        <i class="bi bi-list-task me-2"></i>All Tasks
+    </h2>
+    <p class="text-muted">Manage your tasks and stay organized</p>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-primary text-white py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="bi bi-list-check me-2"></i>Task Overview
+            </h5>
+            <span class="badge bg-white text-dark rounded-pill px-3 py-2">
+                <i class="bi bi-check2-circle me-1 text-success"></i>
+                {{ tasks|length }} task{{ tasks|length|pluralize }}
+            </span>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+<th style="width: 60px;">Done</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th class="text-end" style="width: 180px;">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>
+                        <form method="POST" action="{% url 'todo:task_toggle' task.id %}">
+                            {% csrf_token %}
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="completed"
+                                onchange="this.form.submit()"
+                                {% if task.completed %}checked{% endif %}
+                            >
+                        </form>
+                    </td>
+
+                    <td class="fw-semibold {% if task.completed %}text-muted text-decoration-line-through{% endif %}">
+                        {{ task.title }}
+                    </td>
+
+                    <td>
+                        {% if task.description %}
+                            <span class="text-muted">{{ task.description|linebreaksbr }}</span>
+                        {% else %}
+                            <span class="text-muted">—</span>
+                        {% endif %}
+                    </td>
+
+<td class="text-nowrap">
+                        <span class="text-muted">
+                            <i class="bi bi-calendar3 me-1 text-primary"></i>{{ task.created_at|date:"M d, Y" }}
+                        </span>
+                        <br>
+                        <small class="text-muted">
+                            <i class="bi bi-clock me-1 text-primary"></i>{{ task.created_at|date:"h:i A" }}
+                        </small>
+                    </td>
+
+                    <td>
+                        {% if task.completed %}
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle-fill me-1"></i>Completed
+                            </span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">
+                                <i class="bi bi-hourglass-split me-1"></i>Pending
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td class="text-end">
+                        <a href="{% url 'todo:task_update' task.id %}" class="btn btn-warning btn-sm me-1">
+                            <i class="bi bi-pencil-square me-1"></i>Edit
+                        </a>
+
+                        <a href="{% url 'todo:task_delete' task.id %}" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash me-1"></i>Delete
+                        </a>
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr>
+<td colspan="6">
+                        <div class="text-center py-5">
+                            <i class="bi bi-inbox fs-1 text-muted d-block mb-3"></i>
+                            <h5 class="mb-1">No tasks found</h5>
+                            <p class="text-muted mb-3">Start by creating your first task to get organized!</p>
+                            <a href="{% url 'todo:task_create' %}" class="btn btn-warning">
+                                <i class="bi bi-plus-lg me-1"></i>Add Task
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+</content>

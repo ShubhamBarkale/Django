@@ -1,0 +1,106 @@
+{% extends "todo/base.html" %}
+
+{% block title %}{% if task %}Edit Task{% else %}Add Task{% endif %} - Todo App{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="mb-4 text-center">
+            <h2 class="fw-bold text-primary">
+                {% if task %}
+                    <i class="bi bi-pencil-square me-2"></i>Edit Task
+                {% else %}
+                    <i class="bi bi-plus-circle me-2"></i>Add New Task
+                {% endif %}
+            </h2>
+            <p class="text-muted">
+                {% if task %}Update the details of your task below{% else %}Fill in the details to create a new task{% endif %}
+            </p>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white py-3">
+                <h5 class="mb-0">
+                    {% if task %}
+                        <i class="bi bi-pencil-square me-2"></i>Task Details
+                    {% else %}
+                        <i class="bi bi-plus-long me-2"></i>Create Task
+                    {% endif %}
+                </h5>
+            </div>
+
+            <div class="card-body p-4">
+                {% if error %}
+                    <div class="alert alert-danger d-flex align-items-center shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div>{{ error }}</div>
+                    </div>
+                {% endif %}
+
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label fw-semibold">
+                            <i class="bi bi-type me-1 text-primary"></i>Title <span class="text-danger">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            placeholder="e.g. Finish the project report"
+                            value="{{ task.title }}"
+                            required
+                        >
+                        <div class="form-text">Give your task a clear and concise title.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-semibold">
+                            <i class="bi bi-textarea-t me-1 text-primary"></i>Description
+                        </label>
+                        <textarea
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            rows="4"
+                            placeholder="Add more details about this task (optional)"
+                        >{{ task.description }}</textarea>
+                        <div class="form-text">Add any additional details or notes.</div>
+                    </div>
+
+                    {% if task %}
+                        <div class="form-check form-switch mb-4 p-3 rounded bg-light border">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="completed"
+                                name="completed"
+                                {% if task.completed %}checked{% endif %}
+                            >
+                            <label class="form-check-label fw-semibold" for="completed">
+                                Mark as completed
+                            </label>
+                        </div>
+                    {% endif %}
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success flex-grow-1 py-2">
+                            <i class="bi bi-check-lg me-1"></i>
+                            {% if task %}Save Changes{% else %}Add Task{% endif %}
+                        </button>
+
+                        <a href="{% url 'todo:task_list' %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-lg me-1"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+</content>

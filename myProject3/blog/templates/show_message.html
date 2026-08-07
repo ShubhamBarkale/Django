@@ -1,0 +1,134 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Messages</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fc;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+
+        .container{
+            width:600px;
+            background:#fff;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 10px 30px rgba(0,0,0,.15);
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+            margin-bottom:25px;
+        }
+
+        ul{
+            list-style:none;
+        }
+
+        li{
+            padding:15px 20px;
+            margin-bottom:15px;
+            border-radius:10px;
+            font-size:16px;
+            font-weight:500;
+            transition:.3s ease;
+            border-left:6px solid;
+        }
+
+        li:hover{
+            transform:translateX(6px);
+        }
+
+        /* Debug */
+        .debug{
+            background:#eceff1;
+            color:#455a64;
+            border-color:#607d8b;
+        }
+
+        /* Info */
+        .info{
+            background:#e3f2fd;
+            color:#0d47a1;
+            border-color:#2196f3;
+        }
+
+        /* Success */
+        .success{
+            background:#e8f5e9;
+            color:#1b5e20;
+            border-color:#4caf50;
+        }
+
+        /* Warning */
+        .warning{
+            background:#fff8e1;
+            color:#e65100;
+            border-color:#ff9800;
+        }
+
+        /* Error */
+        .error{
+            background:#ffebee;
+            color:#b71c1c;
+            border-color:#f44336;
+        }
+
+        .empty{
+            text-align:center;
+            color:#777;
+            font-size:18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📩 Django Messages</h1>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {% if message.tags == "debug" %}
+                        🐞
+                    {% elif message.tags == "info" %}
+                        ℹ️
+                    {% elif message.tags == "success" %}
+                        ✅
+                    {% elif message.tags == "warning" %}
+                        ⚠️
+                    {% elif message.tags == "error" %}
+                        ❌
+                    {% endif %}
+
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty">No messages available.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
+```
