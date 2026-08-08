@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+<div class="card card-centered">
+    <h2>Create Account</h2>
+    <p class="subtitle">Join us and get started today.</p>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-block">Register</button>
+    </form>
+    <p class="subtitle" style="margin-top: 1.5rem; text-align: center;">
+        Already have an account? <a href="{% url 'login' %}" class="btn btn-outline" style="margin-left: 0.5rem;">Login</a>
+    </p>
+</div>
+{% endblock %}
