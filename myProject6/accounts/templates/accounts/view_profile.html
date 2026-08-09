@@ -1,0 +1,30 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}View Profiles | ProfileHub{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>View Profiles 👥</h1>
+    <p>Browse through all the awesome profiles uploaded by our community.</p>
+</div>
+
+{% if profiles %}
+    <div class="profile-grid">
+        {% for profile in profiles %}
+            <div class="profile-card">
+                <img src="{{ profile.image.url }}" alt="{{ profile.name }}">
+                <div class="profile-card-body">
+                    <div class="avatar">{{ profile.name|first|upper }}</div>
+                    <h3>{{ profile.name }}</h3>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h3>No profiles yet</h3>
+        <p>Be the first to upload your profile picture!</p>
+    </div>
+{% endif %}
+{% endblock %}

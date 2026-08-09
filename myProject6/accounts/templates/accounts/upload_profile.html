@@ -1,0 +1,33 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Upload Profile | ProfileHub{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Upload Profile 📸</h1>
+    <p>Add your name and profile picture to showcase your awesome profile to the world.</p>
+</div>
+
+<div class="card">
+    <h2 class="card-title">Upload Picture</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <ul class="errorlist">{{ form.non_field_errors }}</ul>
+        {% endif %}
+        {% for field in form %}
+            <div class="form-field">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="helptext">{{ field.help_text }}</div>
+                {% endif %}
+                {% for error in field.errors %}
+                    <ul class="errorlist"><li>{{ error }}</li></ul>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn">Upload 🚀</button>
+    </form>
+</div>
+{% endblock %}
