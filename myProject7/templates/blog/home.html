@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - Home{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Welcome to BlogHub</h1>
+    <p class="page-subtitle">Discover amazing stories and insights from our community</p>
+</div>
+
+<!-- Filter Section -->
+<div class="filter-section">
+    <div class="filter-container">
+        <a href="{% url 'home' %}" class="filter-btn {% if not selected_category %}active{% endif %}">
+            All Posts
+        </a>
+        {% for category in categories %}
+            {% if category %}
+            <a href="?category={{ category }}" class="filter-btn {% if selected_category == category %}active{% endif %}">
+                {{ category }}
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Posts Grid -->
+<div class="posts-grid">
+    {% if posts %}
+        {% for post in posts %}
+        <div class="post-card">
+            <div class="post-header">
+                <h2 class="post-title">
+                    <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+                </h2>
+                {% if post.catagory %}
+                <span class="post-category">{{ post.catagory }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="post-content">
+                <p class="post-excerpt">{{ post.context|truncatewords:30 }}</p>
+            </div>
+            
+            <div class="post-footer">
+                <a href="{% url 'post_detail' post.id %}" class="read-more">Read More</a>
+                <div class="post-actions">
+                    <a href="{% url 'edit_post' post.id %}" class="action-link edit" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'delete_post' post.id %}" class="action-link delete" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <h3>No posts yet</h3>
+        <p>Be the first to create a post!</p>
+        <a href="{% url 'create_post' %}" class="btn btn-primary">Create Your First Post</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

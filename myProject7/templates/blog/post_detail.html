@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - Blog{% endblock %}
+
+{% block content %}
+<div class="post-detail-container">
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <a href="{% url 'home' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Posts
+            </a>
+            
+            <h1 class="detail-title">{{ post.title }}</h1>
+            
+            {% if post.catagory %}
+            <span class="detail-category">{{ post.catagory }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="post-detail-content">
+            {{ post.context }}
+        </div>
+        
+        <div class="post-detail-actions">
+            <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">
+                <i class="fas fa-edit"></i> Edit Post
+            </a>
+            <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete Post
+            </a>
+        </div>
+    </div>
+    
+    <!-- Related Posts Sidebar -->
+    <aside class="sidebar">
+        <div class="widget">
+            <h3 class="widget-title">Quick Actions</h3>
+            <ul class="quick-actions">
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> View All Posts</a></li>
+                <li><a href="{% url 'create_post' %}"><i class="fas fa-plus"></i> Create New Post</a></li>
+            </ul>
+        </div>
+    </aside>
+</div>
+{% endblock %}

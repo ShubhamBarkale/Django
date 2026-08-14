@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Post - Blog{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-wrapper">
+        <h1 class="form-title">
+            <i class="fas fa-edit"></i> Edit Post
+        </h1>
+        
+        <form method="POST" class="post-form" id="editPostForm">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="title" class="form-label">
+                    <i class="fas fa-heading"></i> Post Title
+                </label>
+                <input 
+                    type="text" 
+                    id="title" 
+                    name="title" 
+                    class="form-input" 
+                    value="{{ post.title }}"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="category" class="form-label">
+                    <i class="fas fa-tag"></i> Category
+                </label>
+                <select id="category" name="category" class="form-input">
+                    <option value="">Select a category</option>
+                    <option value="Technology" {% if post.catagory == 'Technology' %}selected{% endif %}>Technology</option>
+                    <option value="Travel" {% if post.catagory == 'Travel' %}selected{% endif %}>Travel</option>
+                    <option value="Lifestyle" {% if post.catagory == 'Lifestyle' %}selected{% endif %}>Lifestyle</option>
+                    <option value="Food" {% if post.catagory == 'Food' %}selected{% endif %}>Food</option>
+                    <option value="Business" {% if post.catagory == 'Business' %}selected{% endif %}>Business</option>
+                    <option value="Entertainment" {% if post.catagory == 'Entertainment' %}selected{% endif %}>Entertainment</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="context" class="form-label">
+                    <i class="fas fa-align-left"></i> Post Content
+                </label>
+                <textarea 
+                    id="context" 
+                    name="context" 
+                    class="form-textarea" 
+                    rows="12"
+                    required
+                >{{ post.context }}</textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a href="{% url 'post_detail' post.id %}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
