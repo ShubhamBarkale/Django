@@ -1,0 +1,580 @@
+/* ==========================================
+   MyBlog Platform - Custom Styles
+   ========================================== */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --transition: all 0.3s ease;
+}
+
+/* ==========================================
+   General Styles
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+main {
+    flex: 1;
+}
+
+/* ==========================================
+   Typography
+   ========================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+}
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+a {
+    transition: var(--transition);
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+/* ==========================================
+   Navigation Bar
+   ========================================== */
+
+.navbar {
+    border-bottom: 3px solid var(--primary-color);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.navbar-brand:hover {
+    transform: translateY(-2px);
+    color: var(--info-color) !important;
+}
+
+.navbar-brand i {
+    margin-right: 0.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-left: 1.5rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--info-color);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--info-color) !important;
+}
+
+/* ==========================================
+   Page Header
+   ========================================== */
+
+.page-header {
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-header h1 {
+    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.page-header .lead {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* ==========================================
+   Blog Cards - List View
+   ========================================== */
+
+.blog-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease;
+    transition: var(--transition);
+    background: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+    border-top: 4px solid var(--primary-color);
+}
+
+.blog-card .card-title a {
+    color: #1a1a1a;
+    transition: var(--transition);
+}
+
+.blog-card .card-title a:hover {
+    color: var(--primary-color);
+}
+
+.blog-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.95rem;
+}
+
+.blog-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-meta i {
+    color: var(--primary-color);
+}
+
+.card-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==========================================
+   Buttons
+   ========================================== */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    transition: var(--transition);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #0b5ed7);
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.4);
+    background: linear-gradient(135deg, #0b5ed7, var(--primary-color));
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-outline-secondary {
+    border-width: 2px;
+    color: var(--secondary-color);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-outline-primary {
+    border-width: 2px;
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.btn i {
+    margin-right: 0.5rem;
+}
+
+/* ==========================================
+   Blog Detail Page
+   ========================================== */
+
+.blog-detail {
+    border: none;
+    border-radius: 12px;
+    background: white;
+    animation: fadeIn 0.6s ease;
+}
+
+.blog-detail .card-body {
+    position: relative;
+}
+
+.blog-detail h1 {
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+}
+
+.blog-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.badge {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    border-radius: 8px;
+}
+
+.badge i {
+    margin-right: 0.5rem;
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #505050;
+    margin: 2rem 0;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.blog-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================
+   Footer
+   ========================================== */
+
+footer {
+    margin-top: auto;
+    border-top: 3px solid var(--primary-color);
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+footer small {
+    font-size: 0.9rem;
+}
+
+footer i {
+    transition: var(--transition);
+}
+
+footer i.fa-heart:hover {
+    animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* ==========================================
+   Alerts
+   ========================================== */
+
+.alert {
+    border-radius: 10px;
+    border: none;
+    padding: 1.2rem 1.5rem;
+    font-weight: 500;
+    animation: slideDown 0.4s ease;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.btn-close {
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* ==========================================
+   Empty State
+   ========================================== */
+
+.alert-info.text-center {
+    border: 2px dashed var(--info-color);
+    background-color: #f0f8ff;
+}
+
+.alert-info i {
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
+.alert-info h4 {
+    color: var(--info-color);
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.alert-info p {
+    color: #0c5460;
+}
+
+/* ==========================================
+   Hover Effects
+   ========================================== */
+
+.hover-shadow {
+    transition: var(--transition);
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.transition {
+    transition: var(--transition);
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+
+@media (max-width: 768px) {
+    .nav-link {
+        margin-left: 0;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    .nav-link:active {
+        color: var(--info-color) !important;
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .blog-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .blog-detail .card-body {
+        padding: 2rem 1.5rem;
+    }
+
+    .blog-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .badge {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-content {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    footer p,
+    footer small {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .page-header .lead {
+        font-size: 1rem;
+    }
+
+    .blog-card .card-body {
+        padding: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .alert {
+        padding: 1rem;
+    }
+}
+
+/* ==========================================
+   Loading Animation
+   ========================================== */
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+}
+
+/* ==========================================
+   Scrollbar Styling
+   ========================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0b5ed7;
+}
+
+/* ==========================================
+   Print Styles
+   ========================================== */
+
+@media print {
+    nav,
+    footer,
+    .btn {
+        display: none;
+    }
+
+    .blog-detail {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    body {
+        background-color: white;
+    }
+}
